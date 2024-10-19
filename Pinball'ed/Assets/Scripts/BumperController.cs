@@ -6,7 +6,7 @@ public class BumperController : MonoBehaviour
 {
 
 
-
+    [SerializeField] private float bumpForceAmmount = 7;
 
 
     void OnCollisionEnter(Collision collision)
@@ -17,7 +17,7 @@ public class BumperController : MonoBehaviour
         if (ball.CompareTag("pinball"))
         {
             Rigidbody ballRB = ball.GetComponent<Rigidbody>();
-            ballRB.velocity += ballRB.velocity.normalized * 7;
+            ballRB.velocity += ballRB.velocity.normalized * bumpForceAmmount;
             Debug.Log(ballRB.velocity.magnitude);
         }
     }
