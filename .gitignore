@@ -1,0 +1,45 @@
+# Unity generated files/folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+
+# Crash log and system files
+*.stacktrace
+*.pidb
+*.mdb
+*.opendb
+*.VC.db
+*.DS_Store
+.DS_Store?
+
+# Ignore script debugging files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb.meta
+*.pdb
+
+# Ignore compiled assembly files
+*.dll
+*.exe
+*.so
+*.dylib
+*.jni
+
+# Visual Studio Code settings
+.vscode/
+.vscode/*
+
+# Rider
+.idea/
+.idea/*
+
+# Exclude Temp specifically
+Temp/
