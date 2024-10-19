@@ -7,41 +7,32 @@ public class DestructableObject : MonoBehaviour
 
     [SerializeField] private float maxLife = 10;
     [SerializeField] private float currentLife = 0;
-    [SerializeField] private float damageResistPercentage = 0;
+    [SerializeField] private float damageTakenPercentage = 1;
 
-    [SerializeField] private float damageNormalizerAux = 0.2f;
+    [SerializeField] private float damageNormalizerAux = 0.5f;
     [SerializeField] private float deathAnimationDuration = 1;
 
     [SerializeField] private Transform healthBar;
-    private float healthBarZScale;
+    private float healthBarXScale;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject ball = collision.gameObject;
+   
 
-
-        if (ball.CompareTag("pinball"))
-        {
-            Rigidbody ballRB = ball.GetComponent<Rigidbody>();
-            TakeDamage(ballRB);
-
-        }
-    }
-
-    private void TakeDamage(Rigidbody ballRB)
+    public void TakeDamage(Rigidbody ballRB, float ballDamageMultiplier)
     {
         // velocity magnitude varies from 0 to 20
-        float damageReceived = ballRB.velocity.magnitude * damageNormalizerAux * damageResistPercentage;
-        maxLife -= damageReceived;
+        float damageReceived = ballRB.velocity.magnitude * damageNormalizerAux * damageTakenPercentage * ballDamageMultiplier;
+        currentLife -= damageReceived;
 
         Vector3 newScale = healthBar.localScale;
-        newScale.z = healthBarZScale * currentLife / maxLife;
+        newScale.x = healthBarXScale * (currentLife / maxLife);
         healthBar.localScale = newScale;
 
         if (currentLife <= 0)
         {
+            newScale.x = 0;
+            healthBar.localScale = newScale;
             currentLife = 0;
-            Die();
+            StartCoroutine(Die());
         }
 
     }
@@ -58,7 +49,7 @@ public class DestructableObject : MonoBehaviour
     void Start()
     {
         currentLife = maxLife;
-        healthBarZScale = healthBar.localScale.z;
+        healthBarXScale = healthBar.localScale.x;
     }
 
     // Update is called once per frame
